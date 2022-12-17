@@ -1,0 +1,26 @@
+{
+  "name": "stockquoter",
+  "version": "1.0.0",
+  "description": "Project made in React and Node to implements a stock quoter, the project is consuming a third party API",
+  "main": "index.js",
+  "scripts": {
+    "start:dev": "npx nodemon src/index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PedroBSanchez/stockQuoter.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PedroBSanchez/stockQuoter/issues"
+  },
+  "homepage": "https://github.com/PedroBSanchez/stockQuoter#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.20",
+    "ts-node": "^10.9.1",
+    "tsc": "^2.0.4",
+    "typescript": "^4.9.4"
+  }
+}
