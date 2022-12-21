@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { UserRepository } from "../repository/UserRepository";
 
 const router = Router();
 
@@ -14,7 +15,10 @@ class userController {
 
   useRoutes(): void {
     this.router.get("/userTeste", (req, res) => {
-      return res.status(200).json("Teste de rota de usuários");
+      const repository = new UserRepository();
+
+      const salvar = repository.adicionarUserTeste();
+      return res.status(200).json(salvar);
     });
   }
 }
