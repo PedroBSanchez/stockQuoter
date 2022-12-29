@@ -11,7 +11,7 @@ const main = async () => {
 
   app.use(express.json());
 
-  app.use("/users", userControllerRoutes);
+  app.use("/api/users", userControllerRoutes);
 
   app.get("/", async (req, res) => {
     res.status(200).json("ok");

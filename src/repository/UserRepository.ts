@@ -10,11 +10,15 @@ class UserRepository {
   }
 
   public async adicionarUserTeste() {
-    return this.model.create({
+    return await this.model.create({
       email: "teste",
-      password: "teste",
+      password: "teste123",
       stocks: ["teste1", "teste2", "teste3"],
     });
+  }
+
+  public async findUserByEmail(email: string) {
+    return await this.model.findOne({ email: email }).select("+password");
   }
 }
 

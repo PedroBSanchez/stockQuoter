@@ -4,4 +4,9 @@ interface InterfaceUser {
   stocks: [string];
 }
 
-export { InterfaceUser };
+interface InterfaceLogin {
+  email: string;
+  password: string;
+}
+
+export { InterfaceUser, InterfaceLogin };

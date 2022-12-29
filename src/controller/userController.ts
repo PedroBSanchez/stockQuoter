@@ -1,12 +1,17 @@
 import { Router } from "express";
+import { InterfaceLogin } from "../interface/InterfaceUser";
 import { UserRepository } from "../repository/UserRepository";
+import { UserService } from "../service/UserService";
+import { Request, Response } from "express";
 
 const router = Router();
 
 class userController {
   private router: Router;
+  private userService: UserService;
   constructor(router: Router) {
     this.router = router;
+    this.userService = new UserService();
   }
 
   getRouter(): Router {
@@ -20,6 +25,22 @@ class userController {
       const salvar = repository.adicionarUserTeste();
       return res.status(200).json(salvar);
     });
+
+    this.router.post(
+      "/login",
+      async (req: Request, res: Response): Promise<Response> => {
+        const loginParam: InterfaceLogin = req.body;
+        const login = await this.userService.login(loginParam);
+
+        if (login.error) {
+          return res.status(400).json(login.error);
+        }
+
+        login.password = undefined;
+
+        return res.status(200).json(login);
+      }
+    );
   }
 }
 
