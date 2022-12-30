@@ -36,7 +36,7 @@ class userController {
           return res.status(400).json(login.error);
         }
 
-        login.password = undefined;
+        login.user.password = undefined;
 
         return res.status(200).json(login);
       }

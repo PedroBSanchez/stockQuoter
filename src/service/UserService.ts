@@ -1,6 +1,9 @@
 import { InterfaceLogin } from "../interface/InterfaceUser";
 import { UserRepository } from "../repository/UserRepository";
 import Bcrypt from "bcrypt";
+import Jwt from "jsonwebtoken";
+
+const authConfig = require("../config/auth");
 
 class UserService {
   private userRepository: UserRepository;
@@ -19,7 +22,13 @@ class UserService {
       return { error: "Invalid password" };
     }
 
-    return user;
+    // Gerar token
+
+    const token = Jwt.sign({ id: user.id }, authConfig.secret, {
+      expiresIn: 86400,
+    });
+
+    return { user, token };
   }
 }
 
