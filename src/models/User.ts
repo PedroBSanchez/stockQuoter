@@ -1,12 +1,12 @@
 class User {
   public email: string;
   public password: string;
-  public stocks: Array<string>;
+  public stocks: [string];
   public created_at: Date;
   constructor(
     email: string,
     password: string,
-    stocks: Array<string>,
+    stocks: [string],
     created_at: Date
   ) {
     this.email = email;

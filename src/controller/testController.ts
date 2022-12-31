@@ -21,6 +21,7 @@ class testController {
       return res.status(200).send({ ok: "sesdfasdf" });
     });
     this.router.use(this.authMiddleware);
+    //Abaixo todas as rota precisam de autenticação
     this.router.get("/", (req: any, res) => {
       return res.status(200).send({ ok: true, user: req.userId });
     });

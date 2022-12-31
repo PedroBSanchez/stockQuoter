@@ -1,8 +1,14 @@
 import { Router } from "express";
-import { InterfaceLogin } from "../interface/InterfaceUser";
+import {
+  InterfaceAddStock,
+  InterfaceCreateUser,
+  InterfaceLogin,
+  InterfaceRemoveStock,
+} from "../interface/InterfaceUser";
 import { UserRepository } from "../repository/UserRepository";
 import { UserService } from "../service/UserService";
 import { Request, Response } from "express";
+import { any } from "joi";
 
 const router = Router();
 
@@ -21,13 +27,6 @@ class userController {
   }
 
   useRoutes(): void {
-    this.router.get("/userTeste", (req, res) => {
-      const repository = new UserRepository();
-
-      const salvar = repository.adicionarUserTeste();
-      return res.status(200).json(salvar);
-    });
-
     this.router.post(
       "/login",
       async (req: Request, res: Response): Promise<Response> => {
@@ -43,6 +42,43 @@ class userController {
         return res.status(200).json(login);
       }
     );
+    this.router.post("/create", async (req, res) => {
+      const newUser: InterfaceCreateUser = req.body;
+
+      const createNewUser = await this.userService.create(newUser);
+
+      if (createNewUser.error) return res.status(400).send(createNewUser.error);
+      createNewUser.user.password = undefined;
+
+      return res.status(200).send(createNewUser);
+    });
+
+    this.router.use(this.authMiddleware);
+
+    // Adicionar ação
+
+    this.router.put("/addstock", async (req: any, res) => {
+      const newStock: InterfaceAddStock = req.body;
+      const userId = req.userId;
+
+      const addStock = await this.userService.addStock(newStock, userId);
+
+      if (addStock.error) {
+        return res.status(400).send(addStock);
+      }
+      return res.status(200).send({ success: "Stock successfully added" });
+    });
+
+    this.router.delete("/removestock", async (req: any, res) => {
+      const removeStock: InterfaceRemoveStock = req.body;
+      const userId = req.userId;
+
+      const pullStock = await this.userService.removeStock(removeStock, userId);
+
+      if (pullStock.error) return res.status(400).send(pullStock);
+
+      return res.status(200).send({ success: "Stock successfully removed" });
+    });
   }
 }
 
