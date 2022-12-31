@@ -2,6 +2,7 @@ import { config } from "dotenv";
 import express from "express";
 import { connectToDatabase } from "./database/Mongo";
 import { userControllerRoutes } from "./controller/userController";
+import { testControllerRoutes } from "./controller/testController";
 
 const main = async () => {
   config();
@@ -12,6 +13,7 @@ const main = async () => {
   app.use(express.json());
 
   app.use("/api/users", userControllerRoutes);
+  app.use("/api/test", testControllerRoutes);
 
   app.get("/", async (req, res) => {
     res.status(200).json("ok");

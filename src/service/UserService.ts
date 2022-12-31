@@ -5,6 +5,8 @@ import Jwt from "jsonwebtoken";
 
 const authConfig = require("../config/auth");
 
+// Ao criar o usuário também gerar um token e retornar esse
+
 class UserService {
   private userRepository: UserRepository;
 
@@ -24,11 +26,13 @@ class UserService {
 
     // Gerar token
 
-    const token = Jwt.sign({ id: user.id }, authConfig.secret, {
+    return { user, token: this.generateToken({ id: user.id }) };
+  }
+
+  private generateToken(params = {}) {
+    return Jwt.sign({ id: params }, authConfig.secret, {
       expiresIn: 86400,
     });
-
-    return { user, token };
   }
 }
 

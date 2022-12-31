@@ -9,9 +9,11 @@ const router = Router();
 class userController {
   private router: Router;
   private userService: UserService;
+  private authMiddleware: any;
   constructor(router: Router) {
     this.router = router;
     this.userService = new UserService();
+    this.authMiddleware = require("../middlewares/auth");
   }
 
   getRouter(): Router {
