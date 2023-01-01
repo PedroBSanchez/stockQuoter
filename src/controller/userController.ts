@@ -55,8 +55,6 @@ class userController {
 
     this.router.use(this.authMiddleware);
 
-    // Adicionar ação
-
     this.router.put("/addstock", async (req: any, res) => {
       const newStock: InterfaceAddStock = req.body;
       const userId = req.userId;
@@ -78,6 +76,18 @@ class userController {
       if (pullStock.error) return res.status(400).send(pullStock);
 
       return res.status(200).send({ success: "Stock successfully removed" });
+    });
+
+    this.router.get("/getallstocks", async (req: any, res) => {
+      const userId = req.userId;
+
+      const allStocks = await this.userService.getAllStocks(userId);
+
+      if (allStocks.error) {
+        return res.status(400).send(allStocks);
+      }
+
+      return res.status(200).send(allStocks);
     });
   }
 }

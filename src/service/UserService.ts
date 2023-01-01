@@ -80,6 +80,14 @@ class UserService {
     return pullStock;
   }
 
+  public async getAllStocks(userId: object): Promise<any> {
+    const stocks = await this.userRepository.getAllStocks(userId);
+
+    if (!stocks || stocks === undefined) return { error: "Not found" };
+
+    return stocks;
+  }
+
   private generateToken(params = {}) {
     return Jwt.sign({ id: params }, authConfig.secret, {
       expiresIn: 86400,
@@ -103,8 +111,6 @@ class UserService {
         stockExists = false;
         return;
       });
-
-    console.log(stockExists);
 
     if (!stockExists) {
       return { error: "Stock invalid" };
