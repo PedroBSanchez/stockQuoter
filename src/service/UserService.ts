@@ -88,6 +88,14 @@ class UserService {
     return stocks;
   }
 
+  public async getUser(userId: object): Promise<any> {
+    const user = await this.userRepository.getUser(userId);
+
+    if (!user || user == undefined) return { error: "Not found" };
+
+    return user;
+  }
+
   private generateToken(params = {}) {
     return Jwt.sign({ id: params }, authConfig.secret, {
       expiresIn: 86400,

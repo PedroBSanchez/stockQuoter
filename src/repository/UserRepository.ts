@@ -55,6 +55,10 @@ class UserRepository {
   public async getAllStocks(userId: object): Promise<any> {
     return await this.model.findOne({ id: userId }).select("stocks");
   }
+
+  public async getUser(userId: object): Promise<any> {
+    return await this.model.findOne({ id: userId });
+  }
 }
 
 export { UserRepository };

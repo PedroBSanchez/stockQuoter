@@ -89,6 +89,18 @@ class userController {
 
       return res.status(200).send(allStocks);
     });
+
+    this.router.get("/getuser", async (req: any, res) => {
+      const userId = req.userId;
+
+      const user = await this.userService.getUser(userId);
+
+      if (user.error) {
+        return res.status(400).send(user);
+      }
+
+      return res.status(200).send(user);
+    });
   }
 }
 
