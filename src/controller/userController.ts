@@ -54,7 +54,7 @@ class userController {
     });
 
     this.router.put("/addstock", async (req: any, res) => {
-      this.router.use(this.authMiddleware());
+      this.router.use(this.authMiddleware(req, res));
       const newStock: InterfaceAddStock = req.body;
       const userId = req.userId;
 
@@ -67,6 +67,7 @@ class userController {
     });
 
     this.router.delete("/removestock", async (req: any, res) => {
+      this.router.use(this.authMiddleware(req, res));
       const removeStock: InterfaceRemoveStock = req.body;
       const userId = req.userId;
 
@@ -78,6 +79,7 @@ class userController {
     });
 
     this.router.get("/getallstocks", async (req: any, res) => {
+      this.router.use(this.authMiddleware(req, res));
       const userId = req.userId;
 
       const allStocks = await this.userService.getAllStocks(userId);
@@ -90,6 +92,7 @@ class userController {
     });
 
     this.router.get("/getuser", async (req: any, res) => {
+      this.router.use(this.authMiddleware());
       const userId = req.userId;
 
       const user = await this.userService.getUser(userId);
