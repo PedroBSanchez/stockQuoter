@@ -9,8 +9,6 @@ import Bcrypt from "bcrypt";
 import Jwt, { verify } from "jsonwebtoken";
 import axios from "axios";
 
-const authConfig = require("../config/auth");
-
 // Ao criar o usuário também gerar um token e retornar esse
 
 class UserService {
