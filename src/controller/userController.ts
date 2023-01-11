@@ -53,9 +53,8 @@ class userController {
       return res.status(200).send(createNewUser);
     });
 
-    this.router.use(this.authMiddleware());
-
     this.router.put("/addstock", async (req: any, res) => {
+      this.router.use(this.authMiddleware());
       const newStock: InterfaceAddStock = req.body;
       const userId = req.userId;
 
