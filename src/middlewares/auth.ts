@@ -1,8 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import Jwt, { decode } from "jsonwebtoken";
 
-const authConfig = require("../config/auth.json");
-
 module.exports = (req: any, res: Response, next: NextFunction) => {
   const authHeader = req.headers.authorization;
 
@@ -20,11 +18,15 @@ module.exports = (req: any, res: Response, next: NextFunction) => {
   if (!(scheme === "Bearer"))
     return res.status(401).send({ error: "Token malformatted" });
 
-  Jwt.verify(token, authConfig.secret, (err: any, decoded: any) => {
-    if (err) return res.status(401).send({ error: "Token invalid" });
+  Jwt.verify(
+    token,
+    "c6cb80d67cb540d698c2a3e7c54246ca",
+    (err: any, decoded: any) => {
+      if (err) return res.status(401).send({ error: "Token invalid" });
 
-    req.userId = decoded.id;
+      req.userId = decoded.id;
 
-    return next();
-  });
+      return next();
+    }
+  );
 };
