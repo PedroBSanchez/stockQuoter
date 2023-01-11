@@ -24,11 +24,11 @@ class UserRepository {
 
   public async addStock(
     newStock: InterfaceAddStock,
-    userId: object
+    userId: any
   ): Promise<any> {
     console.log(userId);
     const addStock = await this.model.updateOne(
-      { id: userId },
+      { _id: userId.id },
       {
         $addToSet: {
           stocks: newStock.stock.toUpperCase(),
@@ -41,10 +41,10 @@ class UserRepository {
 
   public async removeStock(
     removeStock: InterfaceRemoveStock,
-    userId: object
+    userId: any
   ): Promise<any> {
     return await this.model.updateOne(
-      { id: userId },
+      { _id: userId.id },
       {
         $pull: {
           stocks: removeStock.stock.toUpperCase(),
@@ -53,12 +53,12 @@ class UserRepository {
     );
   }
 
-  public async getAllStocks(userId: object): Promise<any> {
-    return await this.model.findOne({ id: userId }).select("stocks");
+  public async getAllStocks(userId: any): Promise<any> {
+    return await this.model.findOne({ _id: userId.id }).select("stocks");
   }
 
-  public async getUser(userId: object): Promise<any> {
-    return await this.model.findOne({ id: userId });
+  public async getUser(userId: any): Promise<any> {
+    return await this.model.findOne({ _id: userId.id });
   }
 }
 
