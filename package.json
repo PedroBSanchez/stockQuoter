@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Project made in React and Node to implements a stock quoter, the project is consuming a third party API",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "start:dev": "npx nodemon src/index.ts",
     "start": "node build/index.js",
