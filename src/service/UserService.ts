@@ -97,7 +97,7 @@ class UserService {
   }
 
   private generateToken(params = {}) {
-    return Jwt.sign({ id: params }, authConfig.secret, {
+    return Jwt.sign({ id: params }, "c6cb80d67cb540d698c2a3e7c54246ca", {
       expiresIn: 86400,
     });
   }
