@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import Jwt, { decode } from "jsonwebtoken";
 
-module.exports = (req: any, res: Response, next: any) => {
+module.exports = (req: any, res: Response, next: NextFunction) => {
   const authHeader = req.headers.authorization;
 
   if (!authHeader) return res.status(401).send({ error: "No token provided" });
@@ -26,8 +26,6 @@ module.exports = (req: any, res: Response, next: any) => {
 
       req.userId = decoded.id;
       console.log(decoded.id);
-
-      return next();
     }
   );
 };
