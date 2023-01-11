@@ -26,6 +26,7 @@ class UserRepository {
     newStock: InterfaceAddStock,
     userId: object
   ): Promise<any> {
+    console.log(userId);
     const addStock = await this.model.updateOne(
       { id: userId },
       {
