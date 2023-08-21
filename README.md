@@ -21,6 +21,8 @@ The Stock Quoter Registration and Price Viewer project offers a straightforward 
 
 # How to run
 
+ - Create a MongoDB Atlas instance at https://www.mongodb.com/atlas/database
+ - set ENV variavles (_env example)
  - run "npm install"
  - run "npm start"
 
